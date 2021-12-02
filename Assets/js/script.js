@@ -10,6 +10,19 @@ var today = moment();
 $("#currentDay").text(today.format("MMMM Do YYYY"))
 
 
+//eventlistener
+$( "#table tbody" ).on( "click", "button", function() {
+    var buttonid = $( this ).attr('id')
+  
+
+    console.log( buttonid );
+    console.log("textarea#".concat(buttonid))
+    console.log( $("textarea#".concat(buttonid)).val())
+    // console.log( $('\'textarea#'+buttonid+'\'' ).val())
+    appendToLocalStorage(buttonid,$("textarea#".concat(buttonid)).val())
+
+  });
+
 
 $(function () {
     $("#sortable1, #sortable2, #sortable3").sortable({
@@ -17,6 +30,11 @@ $(function () {
     }).disableSelection();
 });
 
+
+function notify() {
+    alert( "clicked" );
+  }
+  $( "button" ).on( "click", notify );
 
 
 function loadtableOld() {
@@ -107,28 +125,40 @@ function loadtable(){
 
     }
 
-   
-    $("#tbody").append('<tr class="row justify-content-center"> <th scope="row" class="hour">' + hrs + '</th> <th scope="row" class="note w-75 ' + future + '"><textarea class="area w-100" name="event" id="event"></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn px-2 py-3">💾</button></th> </tr>')
+    //append row on table
+    $("#tbody").append('<tr class="row justify-content-center"> <th scope="row" class="hour">' + hrs + '</th> <th scope="row" class="note w-75 ' + future + '"><textarea class="area w-100" name="event" id='+hrs+'></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn px-2 py-3" id='+hrs+'>💾</button></th> </tr>')
+    
+    //load textare with local storage data
+    $("textarea#".concat(hrs)).val(getLocalStorage(hrs))
     CalRowCounter++
+   
 
     }//end of while loop
 
-  
+    
 
 
 }
 
 
+//check to see if local storage key already contains data and append to it. if it does not contain data, then appends/adds data
 function appendToLocalStorage(hr,data){
-    // if(getLocalStorage(hr) )
-
+  
+        localStorage.setItem(hr,data)
+  
+    return 0;
 }
 
+//returns local storage data on array from 
 function getLocalStorage(hr){
 
-    return JSON.stringify(localStorage.setItem(hr)) || []
+    return localStorage.getItem(hr) || []
 
 }
 
+function clearLocalStorage(hr){
+    localStorage.removeItem(hr)
+    return "cleared"
+}
 
 loadtable()
