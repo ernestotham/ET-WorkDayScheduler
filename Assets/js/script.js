@@ -119,4 +119,16 @@ function loadtable(){
 }
 
 
+function appendToLocalStorage(hr,data){
+    // if(getLocalStorage(hr) )
+
+}
+
+function getLocalStorage(hr){
+
+    return JSON.stringify(localStorage.setItem(hr)) || []
+
+}
+
+
 loadtable()
