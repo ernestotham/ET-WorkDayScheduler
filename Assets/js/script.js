@@ -12,7 +12,7 @@ $("#currentDay").text(today.format("MMMM Do YYYY"))
 
 //eventlistener
 $( "#table tbody" ).on( "click", "button", function() {
-    var buttonid = $( this ).attr('id')
+        var buttonid = $( this ).attr('id')
   
 
     console.log( buttonid );
@@ -72,7 +72,7 @@ function loadtableOld() {
             future = "future"
         }
 
-        $("#tbody").append('<tr class="row justify-content-center"> <th scope="row" class="hour">' + day + '</th> <th scope="row" class="note w-75' + future +  '"><textarea name="event" id="event"></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn">💾</button></th> </tr>')
+        $("#tbody").append('<tr class="row justify-content-center flex-nowrap"> <th scope="row" class="hour">' + day + '</th> <th scope="row" class="note' + future +  '"><textarea name="event" id="event"></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn">💾</button></th> </tr>')
 
         counter++
         starttime = moment().add(counter, 'hours').format('hhA')
@@ -126,12 +126,12 @@ function loadtable(){
     }
 
     //append row on table
-    $("#tbody").append('<tr class="row justify-content-center"> <th scope="row" class="hour">' + hrs + '</th> <th scope="row" class="note w-75 ' + future + '"><textarea class="area w-100" name="event" id='+hrs+'></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn px-2 py-3" id='+hrs+'>💾</button></th> </tr>')
+    $("#tbody").append('<tr class="row justify-content-center flex-nowrap"> <th scope="row" class="hour">' + hrs + '</th> <th scope="row" class="note w-75 ' + future + '"><textarea class="area w-100" name="event" id='+hrs+'></textarea></th> <th scope="row" class="saveBtn"><button class=".saveBtn px-2 py-3" id='+hrs+'>💾</button></th> </tr>')
     
     //load textare with local storage data
     $("textarea#".concat(hrs)).val(getLocalStorage(hrs))
     CalRowCounter++
-   
+  
 
     }//end of while loop
 
